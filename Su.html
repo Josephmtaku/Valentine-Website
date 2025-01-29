@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffffff, #ff7eb3);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            text-align: center;
+        }
+        .envelope {
+            width: 350px;
+            height: 220px;
+            background: #d32f2f;
+            position: relative;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .envelope::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: linear-gradient(135deg, #c62828 0%, #d32f2f 50%, #b71c1c 100%);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+            top: 0;
+            left: 0;
+            border-radius: 10px;
+        }
+        .stamp {
+            width: 50px;
+            height: 50px;
+            background: white;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .text {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+        }
+        .letter {
+            width: 280px;
+            height: 160px;
+            background: white;
+            position: absolute;
+            top: 50px;
+            left: 35px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(100%);
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+            opacity: 0;
+        }
+        .options {
+            display: none;
+            margin-top: 20px;
+        }
+        .options button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+        .yes {
+            background: #28a745;
+            color: white;
+        }
+        .yes:hover {
+            background: #218838;
+        }
+        .no {
+            background: #6c757d;
+            color: white;
+            position: relative;
+        }
+        .celebration {
+            display: none;
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.9);
+            top: 0;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .celebration h1 {
+            font-size: 60px;
+            color: #000000;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        .photo-gallery {
+            display: flex;
+            gap: 20px;
+        }
+        .photo-gallery img {
+            width: 250px; /* Adjust width */
+            height: auto; /* Maintains aspect ratio */
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            object-fit: cover;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope" onclick="openLetter()">
+            <div class="stamp">💌</div>
+            <div class="text">For You</div>
+        </div>
+        <div class="letter" id="letter">
+            <h2>Will you be my Valentine?</h2>
+            <div class="options">
+                <button class="yes" onclick="celebrate()">YES!</button>
+                <button class="no" onclick="moveNo(this)">no</button>
+            </div>
+        </div>
+    </div>
+    <div class="celebration" id="celebration">
+        <h1>Yayyyyyy! 🎉</h1>
+        <div class="photo-gallery">
+            <img src="3b7e2989-3b4c-45fb-b0f5-94ae17b03481.jpg" alt="Us">
+            <img src="IMG_4475.jpeg" alt="Us">
+        </div>
+    </div>
+    <script>
+        let isOpen = false;
+        function openLetter() {
+            if (!isOpen) {
+                document.getElementById('letter').style.transform = 'translateY(-120px)';
+                document.getElementById('letter').style.opacity = '1';
+                setTimeout(() => {
+                    document.querySelector('.options').style.display = 'block';
+                }, 500);
+                isOpen = true;
+            }
+        }
+        function celebrate() {
+            document.getElementById('celebration').style.display = 'flex';
+        }
+        function moveNo(btn) {
+            btn.style.position = 'absolute';
+            btn.style.left = Math.random() * 200 + 'px';
+            btn.style.top = Math.random() * 100 + 'px';
+        }
+    </script>
+</body>
+</html>
